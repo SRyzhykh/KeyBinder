@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Button} from 'react-native';
-import {fetchData} from '../../helpers';
+import {getKeysList} from '../../helpers';
 import {styles} from './WelcomeScreen.styles';
 // import {useNavigation} from '@react-navigation/native';
 
 export const WelcomeScreen = () => {
   // const navigation = useNavigation();
-  const onPress = () => {
-    fetchData();
+  const onPress = async () => {
+    await getKeysList();
     // navigation.navigate();
   };
 
