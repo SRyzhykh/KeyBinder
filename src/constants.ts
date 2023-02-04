@@ -1,6 +1,6 @@
 export const SCREENS = {
-  WELCOME: 'Welcome',
   SCANNER: 'Scanner',
+  LIST: 'List',
 };
 
 export const SIZES = {

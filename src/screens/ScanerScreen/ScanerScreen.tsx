@@ -4,12 +4,16 @@ import {Text, TouchableOpacity} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {getKeysList} from '../../helpers';
 import {styles} from './ScanerScreen.styles';
+import {SCREENS} from '../../constants';
+import {RootStackParamList} from '../../navigation/MainNavigator/MainStackNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export const ScanerScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const onSuccess = e => {
-    getKeysList(e.data);
-    // navigation.navigate
+    const data = getKeysList(e.data);
+    navigation.navigate(SCREENS.LIST, {data});
   };
 
   return (
