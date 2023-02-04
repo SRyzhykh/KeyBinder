@@ -1,5 +1,5 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 
 export const ListScreen = () => {
-    const [listData, setListData] = useState([])
-}
+  const [listData, setListData] = useState([]);
+};
