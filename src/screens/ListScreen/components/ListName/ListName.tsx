@@ -4,11 +4,16 @@ import {SIZES} from '../../../../constants';
 
 interface Props {
   name: string;
-  onPress: () => void;
+  id: string;
+  onPress: (id: string) => void;
 }
 
-export const ListName: FC<Props> = ({name, onPress}) => (
-  <TouchableOpacity style={styles.listName} onPress={onPress}>
+export const ListName: FC<Props> = ({name, onPress, id}) => (
+  <TouchableOpacity
+    style={styles.listName}
+    onPress={() => {
+      onPress(id);
+    }}>
     <Text>{name}</Text>
   </TouchableOpacity>
 );
@@ -16,6 +21,9 @@ export const ListName: FC<Props> = ({name, onPress}) => (
 const styles = StyleSheet.create({
   listName: {
     padding: SIZES.GUTTER,
+    marginHorizontal: SIZES.GUTTER / 2,
     borderRadius: 10,
+    borderColor: 'blue',
+    borderWidth: 2,
   },
 });

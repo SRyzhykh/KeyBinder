@@ -1,20 +1,28 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {StackScreenProps, createStackNavigator} from '@react-navigation/stack';
 import {SCREENS} from '../../constants';
 import {ListScreen, ScanerScreen} from '../../screens';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator<StackParamsList>();
 
-export type RootStackParamList = {
-  ListScreen: {data: object[]};
-  ScanerScreen: undefined;
+export type StackParamsList = {
+  [SCREENS.LIST]: {data: object[]; lists: string[]} | undefined;
+  [SCREENS.SCANNER]: undefined;
 };
+
+export type ScreenProps = StackScreenProps<StackParamsList, SCREENS.LIST, SCREENS.SCANNER>;
 
 export const MainStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name={SCREENS.SCANNER} component={ScanerScreen} />
-      <Stack.Screen name={SCREENS.LIST} component={ListScreen} />
+      <Stack.Screen
+        options={{
+          headerLeft: () => null,
+        }}
+        name={SCREENS.LIST}
+        component={ListScreen}
+      />
     </Stack.Navigator>
   );
 };

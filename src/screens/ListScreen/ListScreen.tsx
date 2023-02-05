@@ -1,30 +1,41 @@
-import React, {FC, useState} from 'react';
+import React, {useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {ListName} from './components/';
-import {RouteProp} from '@react-navigation/native';
+import {ScreenProps} from '../../navigation/MainNavigator/MainStackNavigator';
+import {styles} from './ListScreen.styles';
+import {ListItem} from './components/';
 
-interface Props {
-  route: RouteProp<{params: {data: ItemProps[]}}>;
-}
-
-interface ItemProps {
+type ListItemProps = {
   name: string;
-}
+  text: string;
+};
 
-export const ListScreen: FC<Props> = ({route}) => {
-  const {data} = route.params;
-  const [listData, setListData] = useState(data);
+type ListNameProps = {
+  name: string;
+  id: string;
+};
 
-  const renderItem = ({item}: {item: ItemProps}) => {
+const renderItem = ({item}: {item: ListItemProps}) => {
+  return <ListItem name={item.name} text={item.text} />;
+};
+
+export const ListScreen = ({route}: ScreenProps) => {
+  const {lists, data} = route.params;
+  const [id, setId] = useState(0);
+
+  const renderListItem = ({item}: {item: ListNameProps}) => {
     const onPress = () => {
-      console.log('Pressed: ', item.name);
+      setId(Number(item.id));
+      console.log('id: ', id);
     };
-
-    return <ListName name={item.name} onPress={onPress} />;
+    return <ListName id={item.id} name={item.name} onPress={onPress} />;
   };
+
+  console.log('arr:', data[id]);
   return (
-    <View style={{flex: 1}}>
-      <FlatList renderItem={renderItem} horizontal data={listData} />
+    <View style={styles.container}>
+      <FlatList style={styles.secondList} renderItem={renderListItem} horizontal data={lists} />
+      <FlatList style={styles.mainList} renderItem={renderItem} data={data[id]} />
     </View>
   );
 };
