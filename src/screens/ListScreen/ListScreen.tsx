@@ -15,15 +15,11 @@ type ListNameProps = {
   id: string;
 };
 
-const renderItem = ({item}: {item: ListItemProps}) => {
-  return <ListItem name={item.name} text={item.text} />;
-};
-
 export const ListScreen = ({route}: ScreenProps) => {
-  const {lists, data} = route.params;
+  const {lists, data, ip} = route.params;
   const [id, setId] = useState(0);
 
-  const renderListItem = ({item}: {item: ListNameProps}) => {
+  const renderListNameItem = ({item}: {item: ListNameProps}) => {
     const onPress = () => {
       setId(Number(item.id));
       console.log('id: ', id);
@@ -31,11 +27,15 @@ export const ListScreen = ({route}: ScreenProps) => {
     return <ListName id={item.id} name={item.name} onPress={onPress} />;
   };
 
+  const renderListItem = ({item}: {item: ListItemProps}) => {
+    return <ListItem ip={ip} name={item.name} text={item.text} />;
+  };
+
   console.log('arr:', data[id]);
   return (
     <View style={styles.container}>
-      <FlatList style={styles.secondList} renderItem={renderListItem} horizontal data={lists} />
-      <FlatList style={styles.mainList} renderItem={renderItem} data={data[id]} />
+      <FlatList style={styles.secondList} renderItem={renderListNameItem} horizontal data={lists} />
+      <FlatList style={styles.mainList} renderItem={renderListItem} data={data[id]} />
     </View>
   );
 };

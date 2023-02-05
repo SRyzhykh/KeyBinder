@@ -6,7 +6,7 @@ import {ListScreen, ScanerScreen} from '../../screens';
 const Stack = createStackNavigator<StackParamsList>();
 
 export type StackParamsList = {
-  [SCREENS.LIST]: {data: object[]; lists: string[]} | undefined;
+  [SCREENS.LIST]: {data: object[]; lists: string[]; ip: string} | undefined;
   [SCREENS.SCANNER]: undefined;
 };
 

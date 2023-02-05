@@ -2,15 +2,18 @@ import React, {FC} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {StyleSheet, Text, View} from 'react-native';
 import {SIZES} from '../../../../constants';
+import {fetchData} from '../../../../helpers';
 
 interface Props {
   name: string;
   text: string;
+  ip: string;
 }
 
-export const ListItem: FC<Props> = ({name, text}) => {
+export const ListItem: FC<Props> = ({name, text, ip}) => {
   const onPress = () => {
     console.log(`Item ${name} pressed`);
+    fetchData(ip, name);
   };
 
   return (

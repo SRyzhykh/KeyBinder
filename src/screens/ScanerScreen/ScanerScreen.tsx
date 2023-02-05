@@ -14,7 +14,7 @@ export const ScanerScreen = () => {
   const onSuccess = async e => {
     const data = await getKeysList(e.data);
     console.log('data: ', data.data);
-    navigation.navigate(SCREENS.LIST, {data: data.data, lists: data.lists});
+    navigation.navigate(SCREENS.LIST, {data: data.data, lists: data.lists, ip: e.data});
   };
 
   return (
